@@ -1,8 +1,14 @@
-require('./common/style/index.styl');
+//require('./style/index.styl');
+import './style/index.styl'
+ 
 
-console.log('222');
-let result =[1, 5, 10, 15].findIndex(function(value, index, arr) {
-  return value > 9;
-}) // 2
-
-console.log(result)
+/*import Layer from './components/layer/layer.js'
+const App = function () {
+  const dom = document.querySelector('#app');
+  let layer = new Layer();
+  dom.innerHTML = layer.tpl({
+    name:'joseph',
+    arr:['A','B','C','D']
+  });
+}
+new App()*/
