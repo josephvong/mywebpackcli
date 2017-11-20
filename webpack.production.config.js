@@ -13,7 +13,8 @@ module.exports = {
       path: path.resolve(__dirname, 'dist/'), // 指定打包之后的文件夹
       //publicPath: '/assets/', //指定资源文件引用的目录
       // filename: 'bundle.js' // 指定打包为一个文件 bundle.js
-      filename: 'build/[name]-[hash].js' // 可以打包为多个文件
+      filename: 'js/[name]-[hash].js', // 可以打包为多个文件
+      publicPath:'./'
   },
 
   module: { 
@@ -82,7 +83,7 @@ module.exports = {
         options: {
           limit: 10000,
           name: '[name].[ext]',
-          outputPath:'./images/', 
+          outputPath:'images/', 
           //fallback: 'file-loader'
         }
       }
@@ -113,7 +114,7 @@ module.exports = {
         warnings: false
       }
     }),
-    new ExtractTextPlugin('build/[name]-[hash].css'),
+    new ExtractTextPlugin('css/[name]-[hash].css'),
     // copy custom static assets
     new CopyWebpackPlugin([
       {
