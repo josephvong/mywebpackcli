@@ -1,6 +1,7 @@
 //require('./style/index.styl');
 import './style/index.styl'
- 
+
+console.log(2)
 
 /*import Layer from './components/layer/layer.js'
 const App = function () {

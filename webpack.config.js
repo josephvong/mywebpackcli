@@ -7,10 +7,8 @@ module.exports = {
     'main':'./src/main.js'  // 定义 “/app/main.js”文件 为 入口文件
   },*/
   output:{ // 定义（入口文件的）输出（实际挂在到index.html入口文件的js文件名）
-    path:path.resolve(__dirname,'dist'),//输出路径 '__dirname'是表示主目录的常量，这段代码是表示在主目录‘解析（读/建）’build文件夹，来存放输出的（入口）js文件  
-    
-    filename:'build/[name].bundle.js', // '[name]'表示这个输出文件以前面定义的entry入口js名称来命名输出
-    //publicPath: 'build/',
+    path: path.resolve(__dirname, './dist/build'), // 指定打包之后的文件夹
+    filename:'[name]-[hash].js' 
   },
 
   module:{ // 注册各种模块
@@ -23,7 +21,7 @@ module.exports = {
       },
       { //解析 .html 
         test: /\.html$/,
-        use: 'html-loader'
+        use: 'html-withimg-loader'
       },
       { //解析 .tpl
         test: /\.tpl$/,
@@ -70,9 +68,9 @@ module.exports = {
       { // 图片打包模块
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
-        options: {
+         options: {
           limit: 10000,
-          name: 'images/[name].[ext]?[hash:12]', 
+          name:'./images/[name][hash].[ext]',
           //fallback: 'file-loader'
         }
       }
