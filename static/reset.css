@@ -84,9 +84,21 @@ a {
     text-decoration: none;
     -webkit-backface-visibility: hidden;
 }
+a:active{
+  background-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
 
 li {
     list-style: none;
+}
+
+input,button{
+  outline: none;
+}
+img{ 
+  border:none; 
+  display:block;
 }
 
 ::-webkit-scrollbar {

@@ -8,7 +8,14 @@ module.exports = {
   },*/
   output:{ // 定义（入口文件的）输出（实际挂在到index.html入口文件的js文件名）
     path: path.resolve(__dirname, './dist/build'), // 指定打包之后的文件夹
-    filename:'[name]-[hash].js' 
+    filename:'[name]-[hash].js'
+  },
+  resolve: {
+    extensions: ['.js','.json','.styl'],
+    alias: { 
+      'common':path.join(__dirname, 'src/common'),
+      'style': path.join(__dirname, 'src/style'),
+    }
   },
 
   module:{ // 注册各种模块
@@ -25,6 +32,10 @@ module.exports = {
       },
       { //解析 .tpl
         test: /\.tpl$/,
+        use: 'ejs-loader'
+      },
+      { //解析 .ejs
+        test: /\.ejs$/,
         use: 'ejs-loader'
       },
       { // css 打包模块

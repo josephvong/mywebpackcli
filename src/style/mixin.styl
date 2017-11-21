@@ -1,0 +1,38 @@
+thin-border-bottom($color)
+  position relative
+  //border-bottom 1px solid $color
+  &:before
+    content ""
+    position absolute
+    bottom 0
+    left 0
+    right 0
+    height 1px
+    border-bottom 1px solid $color
+    transform-origin 0 100%
+    transform scaleY(0.5)
+    
+// 不换行
+no-wrap()
+  text-overflow: ellipsis
+  overflow: hidden
+  white-space: nowrap
+
+multiline-hide(num)
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  overflow : hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: num;
+  -webkit-box-orient: vertical;
+  
+// 拓展点击区域的 css 方法: 用伪类 绝对定位 扩大 他的 点击区域
+extend-click()
+  position:relative
+  &:before
+    content ''
+    position absolute
+    top -10px
+    left -10px
+    right -10px
+    bottom -10px

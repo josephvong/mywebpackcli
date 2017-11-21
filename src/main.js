@@ -1,15 +1,27 @@
-//require('./style/index.styl');
 import './style/index.styl'
 
-console.log(2)
+import Layout from './components/layout/layout.js'
+// 子模块
+import BannerInit from './components/banner/banner.js'
+import entryCont from './components/entry/entry.js'
 
-/*import Layer from './components/layer/layer.js'
+
+//const bannerCont = new Banner() 
+
+BannerInit().then((res)=>{
+  console.log(res)
+})
+
+const components = {
+  banner:'',//bannerCont.tpl(),
+  entry:entryCont 
+}
+
 const App = function () {
   const dom = document.querySelector('#app');
-  let layer = new Layer();
-  dom.innerHTML = layer.tpl({
-    name:'joseph',
-    arr:['A','B','C','D']
+  let layout = new Layout();
+  dom.innerHTML = layout.tpl({
+    components:components
   });
 }
-new App()*/
+new App()

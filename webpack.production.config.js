@@ -11,11 +11,16 @@ module.exports = {
   entry: './src/main.js', //入口文件
   output: {
     path: path.resolve(__dirname, './dist/build'), // 指定打包之后的文件夹
-    filename:'[name]-[hash].js'//path.posix.join('build','[name]-[hash].js'),
-    //publicPath: './'
-     
+    filename:'[name]-[hash].js',//path.posix.join('build','[name]-[hash].js'),
+    publicPath: '/build/' 
   },
-
+  resolve: {
+    extensions: ['.js','.json','.styl'],
+    alias: { 
+      'common':path.join(__dirname, 'src/common'),
+      'style': path.join(__dirname, 'src/style'),
+    }
+  },
   module: { 
     rules: [
       { // css 文件打包
@@ -76,13 +81,16 @@ module.exports = {
         test: /\.tpl$/,
         use: 'ejs-loader'
       },
+      { //解析 .ejs
+        test: /\.ejs$/,
+        use: 'ejs-loader'
+      },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name:'./images/[name][hash].[ext]',
-          //fallback: 'file-loader'
+          name:'images/[name][hash].[ext]',
         }
       },
       /*{
@@ -98,7 +106,7 @@ module.exports = {
   plugins: [ // 调用 插件
     new HtmlWebpackPlugin({  //生成 html 入口文件的 插件
       template: './index.html', // 模版文件 （在src文件夹里面的 index.html文件）
-      filename: path.resolve(__dirname, './dist/index.html') // 生成的 文件 （包括路径）
+      filename: '../index.html'//path.resolve(__dirname, './dist/index.html') // 生成的 文件 （包括路径）
     }),
     new CleanPlugin(['./dist']), // 清空 dist文件夹
     new webpack.optimize.CommonsChunkPlugin({

@@ -1,0 +1,9 @@
+
+<div id="entryModule" class="entry">
+ <% for(var i = 0; i < entryData.length; i++) { %> 
+      <a class="item" href="<%= entryData[i].link %>"  >
+        <img src="<%= entryData[i].img %>" > 
+        <p class='name'><%= entryData[i].name %></p>
+      </a>
+ <% } %> 
+</div>
