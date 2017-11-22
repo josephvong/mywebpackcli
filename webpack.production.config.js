@@ -118,13 +118,13 @@ module.exports = {
       }
     }),
     new ExtractTextPlugin({
-      filename:'[name]-[hash].css'//path.posix.join('build','[name]-[hash].css')
+      filename:'[name]-[hash].css'//
     }),
     // copy custom static assets
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, './static'),
-        to: '../static/', //path.resolve(__dirname + '/dist') ,
+        to: '../static/', //
         ignore: ['.*']
       }
     ])

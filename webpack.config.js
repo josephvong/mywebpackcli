@@ -3,12 +3,11 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // 自动生成 html 文件
 
 module.exports = {
-  entry:'./src/main.js',/*{  // 定义入口js ，可以定义 多个 入口js，下面的 output中 用 [name].js 来弹性输出不同名称的 入口文件
-    'main':'./src/main.js'  // 定义 “/app/main.js”文件 为 入口文件
-  },*/
+  entry:'./src/main.js',  // 定义入口js ，可以定义 多个 入口js，下面的 output中 用 [name].js 来弹性输出不同名称的 入口文件
+    
   output:{ // 定义（入口文件的）输出（实际挂在到index.html入口文件的js文件名）
     path: path.resolve(__dirname, './dist/build'), // 指定打包之后的文件夹
-    filename:'[name]-[hash].js'
+    filename:'[name]-[hash].js', 
   },
   resolve: {
     extensions: ['.js','.json','.styl'],
@@ -16,6 +15,9 @@ module.exports = {
       'common':path.join(__dirname, 'src/common'),
       'style': path.join(__dirname, 'src/style'),
     }
+  },
+  externals:{
+    'Swiper':'window.Swiper'
   },
 
   module:{ // 注册各种模块
