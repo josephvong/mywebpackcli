@@ -12,7 +12,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist/build'), // 指定打包之后的文件夹
     filename:'[name]-[hash].js',//path.posix.join('build','[name]-[hash].js'),
-    publicPath: '/build/' 
+    publicPath: './build/' 
   },
   resolve: {
     extensions: ['.js','.json','.styl'],
@@ -90,7 +90,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name:'images/[name][hash].[ext]',
+          name:'images/[name].[ext]',
         }
       },
       /*{
@@ -103,12 +103,14 @@ module.exports = {
     ]
   },
 
-  plugins: [ // 调用 插件
+  plugins: [ // 调用 插件 
     new HtmlWebpackPlugin({  //生成 html 入口文件的 插件
       template: './index.html', // 模版文件 （在src文件夹里面的 index.html文件）
       filename: '../index.html'//path.resolve(__dirname, './dist/index.html') // 生成的 文件 （包括路径）
     }),
+
     new CleanPlugin(['./dist']), // 清空 dist文件夹
+
     new webpack.optimize.CommonsChunkPlugin({
         name: 'vendors' // 将公共模块提取，生成名为`vendors`的chunk
     }),
@@ -127,8 +129,18 @@ module.exports = {
         to: '../static/', //
         ignore: ['.*']
       }
-    ])
-  ]
+    ]),
+
+    
+    
+  ],
+
+  watch:true, // 开启监听模式
+
+  watchOptions:{  // 监听模式 的 参数配置
+    ignored:/node_modules|static/, // 对以下类型 的文件 排除监听
+    poll:1000,   // 监听频率 1s  
+  }
 
 }
 

@@ -10,10 +10,11 @@ import Swiper from 'swiper'
  
  
 const pageInit = function () {
-  BannerInit().then((res)=>{
+  BannerInit() 
     const Entry = document.querySelector('#Entry');
-    Entry.innerHTML = 'AAAAAAAAAAAA'
-  }) 
+    Entry.innerHTML = '00000'
+    //let mySwiper = new Swiper(res.querySelectorAll('.swiper-container')[0],{})
+ 
   
   
   /*const Banner = document.querySelector('#Banner');
