@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --host 192.168.8.74",
+    "start": "webpack-dev-server --host 0.0.0.0",
     "build": "set NODE_ENV=production&&webpack --config ./webpack.production.config.js"
   },
   "author": "",

@@ -7,23 +7,13 @@ import BannerInit from './components/banner/banner.js'
 
 import Swiper from 'swiper'
 
-let mySwiper
-function SwiperInit(DOM){ 
-  mySwiper = new Swiper(DOM,{ 
-    /*initialSlide:1,
-    longSwipesRatio:0.9,
-    observer:true,//修改swiper自己或子元素时，自动初始化swiper
-    observeParents:true,//修改swiper的父元素时，自动初始化swiper
-    updateOnImagesReady : true,*/
-  }) 
-}
+ 
  
 const pageInit = function () {
   BannerInit().then((res)=>{
-    console.log(res)
-    let swiperWrap = res.querySelectorAll('.swiper-container')[0]
-    SwiperInit(swiperWrap) 
-  })
+    const Entry = document.querySelector('#Entry');
+    Entry.innerHTML = 'AAAAAAAAAAAA'
+  }) 
   
   
   /*const Banner = document.querySelector('#Banner');
@@ -37,10 +27,8 @@ const pageInit = function () {
   //dom.innerHTML = LayoutHTML//'<h1>hello world</h1>'
 }
 
-pageInit()
+pageInit() 
+alert("A")
 
-
-setTimeout(function(){
-  mySwiper.init(); 
-},600)
+ 
     

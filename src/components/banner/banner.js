@@ -5,10 +5,8 @@ import getCarouselData from 'common/api/carousel_api'
 const BannerInit = function(){ 
   return getCarouselData().then((res)=>{
     const Banner = document.querySelector('#Banner');
-    Banner.innerHTML = tpl(/*{
-      bannerData:res
-    }*/);
-    return Promise.resolve(Banner) 
+    Banner.innerHTML = tpl()
+    return Promise.resolve(res) 
   }) 
 }
 

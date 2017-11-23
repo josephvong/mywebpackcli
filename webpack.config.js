@@ -1,13 +1,15 @@
 const path = require('path') //调用 node 的 path 自带库  
-const webpack = require('webpack');
+const webpack = require('webpack'); 
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // 自动生成 html 文件
+var CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry:'./src/main.js',  // 定义入口js ，可以定义 多个 入口js，下面的 output中 用 [name].js 来弹性输出不同名称的 入口文件
     
   output:{ // 定义（入口文件的）输出（实际挂在到index.html入口文件的js文件名）
-    path: path.resolve(__dirname, './dist/build'), // 指定打包之后的文件夹
-    filename:'[name]-[hash].js', 
+    path: path.resolve(__dirname, './build'), // 指定打包之后的文件夹
+    filename:'[name]-[hash].js',
+    //publicPath: '/build/'  
   },
   resolve: {
     extensions: ['.js','.json','.styl'],
@@ -15,11 +17,7 @@ module.exports = {
       'common':path.join(__dirname, 'src/common'),
       'style': path.join(__dirname, 'src/style'),
     }
-  },
-  externals:{
-    'Swiper':'window.Swiper'
-  },
-
+  }, 
   module:{ // 注册各种模块
     // 注册 各种 loader 加载器
     rules:[ 
@@ -87,31 +85,31 @@ module.exports = {
           //fallback: 'file-loader'
         }
       }
-      /*{ // 暂时不使用 file-lader
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'file-loader',
-        options: {
-          name (file) {
-            return process.env.NODE_ENV === 'production'?'[hash].[ext]':'[path][name].[ext]'
-          },
-          outputPath:'images'
-        }
-      }*/
+      
     ]
   },
   devServer: { // 配置 开发服务器 
     contentBase: "./", // 本地服务器所加载的页面所在的目录
-    hot: true, // 配置HMR之后可以选择开启
+    //hot: true,  配置HMR之后可以选择开启
     historyApiFallback: true, // 不跳转
-    inline: true // 实时刷新
+    inline: true, // 实时刷新 
+    disableHostCheck:true
   },
   plugins: [
     // 生成 html 的 控件
     new HtmlWebpackPlugin({ 
-      template: './index.html', // 模版文件 
-    }),
+      template: './index.html', // 模版文件
+      //filename: './index.html'//path.resolve(__dirname, './dist/index.html') // 生成的 文件 （包括路径） 
+    }), 
     new webpack.HotModuleReplacementPlugin(), // 热加载插件 
-     
+    // copy custom static assets
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, './static'),
+        to: './static/', //
+        ignore: ['.*']
+      }
+    ])
   ],
 
   devtool:'eval-source-map'
