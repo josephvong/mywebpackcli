@@ -1,19 +1,29 @@
+import 'babel-polyfill' // es6 语法兼容补丁 一定要放到最开始
 import './style/index.styl'
 
  
 // 子模块
 import BannerInit from './components/banner/banner.js'
+import { getSlider } from 'simple-slider';
 //import entryCont from './components/entry/entry.js'
-
-import Swiper from 'swiper'
+ 
 
  
  
 const pageInit = function () {
-  BannerInit() 
-    const Entry = document.querySelector('#Entry');
-    Entry.innerHTML = '00000'
-    //let mySwiper = new Swiper(res.querySelectorAll('.swiper-container')[0],{})
+  BannerInit().then((res)=>{
+    console.log(res)
+    getSlider({
+      container: res.querySelectorAll('.banner-wrap .slider')[0],
+      children:res.querySelectorAll('.banner-wrap .slider img'),
+      transitionTime:1,
+      delay:3.5
+    })
+  }) 
+  const Entry = document.querySelector('#Entry');
+  Entry.innerHTML = '00阿斯顿发送到000' 
+  
+  
  
   
   
@@ -29,7 +39,7 @@ const pageInit = function () {
 }
 
 pageInit() 
-alert("A")
+alert("E")
 
  
     

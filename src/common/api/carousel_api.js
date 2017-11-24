@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-module.exports = function getCarouselData(){
+export function getCarouselData(){
   // let params = new URLSearchParams();
   // params.append('dtype',2)
   // let data = {wordStr:value}

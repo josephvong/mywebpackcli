@@ -1,17 +1,9 @@
-<div  class="banner-wrap">
-  <div class="swiper-container">
-    <div class="swiper-wrapper">
-       
-      <div class="swiper-slider" >
-        <img src="<%= require('./img/ad.png') %>">
-      </div>
-      <div class="swiper-slider" >
-        
-        <img src="<%= require('./img/ad.png') %>">
-      </div> 
-      <div class="swiper-slider" >
-        <img src="<%= require('./img/ad.png') %>"> 
-      </div>  
-    </div>
+<div  class="banner-wrap"> 
+  <div class="slider"  data-simple-slider>
+    <% for (var i = 0; i < bannerList.length; i++) { %>
+      <a href="<%= bannerList[i].url %>">
+        <img src="<%= bannerList[i].picUrl %>" >
+      </a>
+    <% } %> 
   </div> 
 </div>

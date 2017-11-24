@@ -11,15 +11,19 @@ module.exports = {
   entry: './src/main.js', //入口文件
   output: {
     path: path.resolve(__dirname, './dist/build'), // 指定打包之后的文件夹
-    filename:'[name]-[hash].js',//path.posix.join('build','[name]-[hash].js'),
-    publicPath: '/build/' 
+    filename:'[name]-[hash].js',//
+    // 配置打包好的html/css/js文件里面的 公共资源路径，可以通过具体部署环境来配置（如/subDomain/build/）
+    publicPath: '/build/'  // 无论部署到哪里，最后一定要 跟着 ‘/build/’
   },
-  resolve: {
+  resolve: { // 解析与路径别名配置
     extensions: ['.js','.json','.styl'],
     alias: { 
       'common':path.join(__dirname, 'src/common'),
       'style': path.join(__dirname, 'src/style'),
     }
+  },
+  externals: { // 外部资源 的引导
+    'jquery': 'window.jQuery',
   },
   module: { 
     rules: [
@@ -104,7 +108,10 @@ module.exports = {
   },
 
   plugins: [ // 调用 插件 
-
+    new HtmlWebpackPlugin({  //生成 html 入口文件的 插件
+      template: './index.html', // 模版文件 （在src文件夹里面的 index.html文件）
+      filename: '../index.html'//  生成的 路径+名称 对应 output的设置
+    }),
     new CleanPlugin(['./dist/build/']), // 清空 dist文件夹
 
     new webpack.optimize.CommonsChunkPlugin({
@@ -115,10 +122,10 @@ module.exports = {
         warnings: false
       }
     }),
-    new ExtractTextPlugin({
-      filename:'[name]-[hash].css'//
+    new ExtractTextPlugin({ // 将 打包到js 里面的 css 样式分离出一个文件来
+      filename:'[name]-[hash].css'
     }),
-    // copy custom static assets
+    //把 固定 的 资源文件（字体/不打包库）拷贝到 dist/static 文件夹内
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, './static'),
@@ -126,11 +133,6 @@ module.exports = {
         ignore: ['.*']
       }
     ]),
-
-    new HtmlWebpackPlugin({  //生成 html 入口文件的 插件
-      template: './index.html', // 模版文件 （在src文件夹里面的 index.html文件）
-      filename: '../index.html'//path.resolve(__dirname, './dist/index.html') // 生成的 文件 （包括路径）
-    }),
     
   ],
 

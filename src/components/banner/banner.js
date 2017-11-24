@@ -1,15 +1,16 @@
 import tpl from './banner.ejs'
 import './banner.styl'
-import getCarouselData from 'common/api/carousel_api'
+import {getCarouselData} from 'common/api/carousel_api'
+import $ from 'jquery'
 
-
-const BannerInit = function(){
-  const Banner = document.querySelector('#Banner');
-    Banner.innerHTML = tpl() 
-  /*return getCarouselData().then((res)=>{
-    
+const BannerInit = function(){ 
+  return getCarouselData().then((res)=>{ 
+    const Banner = document.querySelector('#Banner');
+    Banner.innerHTML = tpl({
+      bannerList:res
+    }) 
     return Promise.resolve(Banner) 
-  })*/ 
+  }) 
 }
 
-module.exports = BannerInit
+export default BannerInit

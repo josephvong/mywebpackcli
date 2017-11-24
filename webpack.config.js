@@ -1,7 +1,7 @@
 const path = require('path') //调用 node 的 path 自带库  
 const webpack = require('webpack'); 
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // 自动生成 html 文件
-var CopyWebpackPlugin = require('copy-webpack-plugin')
+//var CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry:{main:path.join(__dirname,'src','main.js')},  // 定义入口js ，可以定义 多个 入口js，下面的 output中 用 [name].js 来弹性输出不同名称的 入口文件
@@ -17,7 +17,10 @@ module.exports = {
       'common':path.join(__dirname, 'src/common'),
       'style': path.join(__dirname, 'src/style'),
     }
-  }, 
+  },
+  externals: {
+    'jquery': 'window.jQuery',
+  },  
   module:{ // 注册各种模块
     // 注册 各种 loader 加载器
     rules:[ 
@@ -38,7 +41,7 @@ module.exports = {
         test: /\.ejs$/,
         use: 'ejs-loader'
       },
-      { // css 打包模块
+      { // css 的打包 请参考 https://www.cnblogs.com/doudoujun/p/6405534.html
         test:/\.css$/, 
         use: [
           'style-loader', {
@@ -89,11 +92,11 @@ module.exports = {
     ]
   },
   devServer: { // 配置 开发服务器 
-    contentBase: './',//path.join(__dirname, 'dist'), // 本地服务器所加载的页面所在的目录
-    //hot: true,  配置HMR之后可以选择开启
+    contentBase: './', // 本地服务器所加载的页面所在的目录
+    hot: true,  //配置HMR之后可以选择开启
     historyApiFallback: true, // 不跳转
     inline: true, // 实时刷新 
-    disableHostCheck:true
+    disableHostCheck:true  // 开启通过IP 进行访问 （无需仅仅 localhost）
   },
   plugins: [
      
@@ -101,16 +104,7 @@ module.exports = {
     new HtmlWebpackPlugin({ 
       template: './index.html', // 模版文件
       //filename: '../dev_index.html'//  生成的 文件 （包括路径） 
-    }), 
-    
-    // copy custom static assets
-    /*new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, './static'),
-        to: '../static/', //
-        ignore: ['.*']
-      }
-    ]),*/
+    }),  
 
     new webpack.HotModuleReplacementPlugin(), // 热加载插件
   ],
