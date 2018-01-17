@@ -1,0 +1,37 @@
+<div class="box">
+  <input type="checkbox" id= "<%= actData.activity_id %>" /> 
+  <div class="main">
+    <img class="left-thumb" src="<%= actData.icon_urls %>" />        
+    <div class="center-content">
+      <h3 class="title"><%= actData.activity_name %></h3>
+      <p class="desc"><%= actData.description %></p>  
+    </div>
+    <div class="right-status">
+      <%if(actData.status=="0"){%>
+        <span class="score">+<%= actData.score %></span>
+      <%}else{%>
+        <span class="done"> 已完成 </span>
+      <%}%> 
+    </div>
+  </div>
+  <% if(actData.sublist.length ){  %>
+    <label class="fold-trigger" for="<%= actData.activity_id %>">
+      <img src="<%= require('./img/icon_unfold@2x.png') %>" alt="">
+    </label> 
+    <ul class="fold-list">
+      <% for (var i = 0; i < actData.sublist.length; i++) { %>
+        <li class="list" >
+          <div class="pending"></div>
+          <div class="name"> <%= actData.sublist[i].activity_name %> </div>
+          <div class="status"> 
+            <%if(actData.sublist[i].status=='0'){%>
+              <span class=" score"> + <%= actData.sublist[i].score %> </span>
+            <%}else{%>
+              <span class="done"> 已完成 </span>
+            <%}%>
+          </div>
+        </li>
+      <% } %>   
+    </ul>
+  <% } %>  
+</div>

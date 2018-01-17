@@ -1,0 +1,107 @@
+.box
+  margin-bottom 0.3rem 
+  .main
+    position relative
+    display flex
+    flex-direction row
+    flex-wrap no-wrap
+    align-items center
+    width 100%
+    height 1.78rem 
+    border-radius 0 0.1rem 0.1rem 0
+    border-left-width 0.08rem
+    border-left-style solid
+    background white
+    z-index 2
+    .left-thumb
+      display block
+      flex 0 0 0.5rem
+      width 0.5rem
+      margin 0 0.2rem
+    .center-content
+      flex 1 1 auto
+      h3.title
+        font-size 0.32rem 
+        margin-bottom 0.15rem
+      p.desc
+        line-height 0.32rem
+        font-size 0.28rem
+        color #bababa
+    .right-status
+      flex 0 0 20%
+      text-align center
+      .score
+        font-size 0.34rem
+        color #c23b4c
+        font-weight 700
+      .done
+        font-size 0.28rem
+        color #bababa
+  .fold-trigger
+    position relative
+    display block
+    width 100%
+    height 0.35rem
+    background rgba(0,0,0,0)
+    z-index 5
+    &:before
+      content ''
+      position absolute
+      display block
+      height 1.7rem
+      width 100%
+      left 0
+      top -1.7rem
+      background rgba(0,0,0,0)
+    img
+      position absolute
+      display block
+      width 0.7rem
+      height 0.7rem
+      left 50%
+      top -0.35rem
+      margin-left -0.35rem
+  .fold-list 
+    display none
+    margin-top -0.35rem
+    padding 0.45rem 0 0.1rem 0rem
+    border-radius 0 0.1rem 0.1rem 0
+    background white
+    li.list
+      height 0.76rem
+      padding-left 0.08rem
+      display flex
+      flex-direction row
+      flex-wrap no-wrap
+      align-items center
+      .pending
+        flex 0 0 0.5rem
+        width 0.5rem
+        margin 0 0.2rem
+      .name
+        flex 1 1 auto
+        line-height 0.76rem
+        font-size 0.32rem
+      .status
+        flex 0 0 20%
+        text-align center
+        .score
+          font-size 0.34rem
+          color #c23b4c
+          font-weight 700
+        .done
+          font-size 0.28rem
+          color #bababa 
+  input[type=checkbox]
+    display none
+  input[type=checkbox]:checked ~ .fold-trigger>img
+    transform rotate(180deg)
+  input[type=checkbox]:checked + .main
+    box-shadow: 3px 3px 4px 1px rgba(0,0,0,0.3)
+  input[type=checkbox]:checked ~ .fold-list
+    display block
+
+
+
+
+        

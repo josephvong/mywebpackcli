@@ -13,7 +13,7 @@ module.exports = {
     path: path.resolve(__dirname, './dist/build'), // 指定打包之后的文件夹
     filename:'[name]-[hash].js',//
     // 配置打包好的html/css/js文件里面的 公共资源路径，可以通过具体部署环境来配置（如/subDomain/build/）
-    publicPath: '/build/'  // 无论部署到哪里，最后一定要 跟着 ‘/build/’
+    publicPath: '/hciWeb/build/'  // 无论部署到哪里，最后一定要 跟着 ‘/build/’
   },
   resolve: { // 解析与路径别名配置
     extensions: ['.js','.json','.styl'],

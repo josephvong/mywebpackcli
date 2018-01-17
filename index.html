@@ -3,25 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
-  <title>Document</title>
+  <title>升级攻略</title>
   <link rel="stylesheet" type="text/css" href="./static/reset.css" /> 
   <script src="./static/rem.js"></script>
   <script src="./static/vendor/jquery-2.24.min.js"></script> 
 </head>
 <body> 
 <div id="app"> 
-  <div id="Banner"> 
-  </div> 
-
-  <div id="Entry" class="entry-wrap">
-    this is the entry 
-  </div>
-  <div id="Content" class="content-wrap">this is content
-    <img src="./src/images/jizhi.png" alt="">
-  </div>
-  <div id="Footer" class="footer-wrap">
-    <div   class="inner">footer</div>
-  </div> 
+  <div class="wrap" id="missionList"></div>  
 </div>
-</body> 
+</body>
+ 
+<script>
+function platForm() {
+    var a = window.navigator.userAgent.toLowerCase();
+    var b = a.match(/(iphone|ipod|ipad|android|windows phone|blackberry|symbian|Windows Phone)/);
+    if (!!b) {
+        b = b.toString();
+    }
+    if (b) {
+        if (b.indexOf("iphone") >= 0) {
+            return "iphone"
+        } else if (b.indexOf("ipod") >= 0) {
+            return "ipod"
+        } else if (b.indexOf("ipad") >= 0) {
+            return "ipad"
+        } else if (b.indexOf("android") >= 0) {
+            return "android"
+        } else if (b.indexOf("windows phone") >= 0) {
+            return "wp7"
+        } else if (b.indexOf("symbian") >= 0) {
+            return "symbian"
+        } else if (b.indexOf("blackberry") >= 0) {
+            return "blackberry"
+        } else if (b.indexOf("Windows Phone") >= 0) {
+            return "wp7"
+        } else {
+            return "unknow"
+        }
+    }
+    return "unknow"
+}
+// 控制App 自动调用 callback 函数
+var plat = platForm();  // 获取当前浏览器 类型
+var ua = window.navigator.userAgent.toLowerCase();// 记录当前浏览器的类型值
+
+var info = {
+  "sign":"9143084D7BCCFC217F545FC4C70E24FE",
+  "user_id":"549235",
+  "session_id":"nrui53ubhlq3lbkcpcjhshhj85",
+  "user_type":"体验用户" 
+}
+// 获取用户信息
+if (ua.indexOf('kachabrowser') != -1) {
+    // 如果在app里请求调用callbackfunction获取用户ID
+    if ("iphone" == plat || "ipod" == plat || "ipad" == plat) {
+      window.location.href = "KachaJSBridge://1";  // 浏览器 路径以改变时app自动调用上面的callbacks 函数  
+    } else { 
+      window.kacha.jsInvoke(1);  // 浏览器 路径以改变时app自动调用上面的callbacks 函数
+    } 
+}else{
+  // 非APP 中打开页面 
+  window.kachaUserInfo = info
+}
+function callbackfunction(type, str) {
+  strs = str.split("|");    // 获取用户Id  
+  //alert(strs)
+  window.kachaUserInfo = {
+    sign:strs[0],
+    user_id:strs[1],
+    session_id:strs[2],
+    user_type:strs[3]?'体验用户':'注册用户'
+  }
+}
+</script>
 </html>
